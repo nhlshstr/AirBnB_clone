@@ -32,7 +32,7 @@ class BaseModel:
 
     def save(self):
         """Method to update"""
-        self.updated_at = self.updation.isoformat()
+        self.updated_at = datetime.datetime.today()
 
     def to_dict(self):
         """Adds class name to __dict__"""
