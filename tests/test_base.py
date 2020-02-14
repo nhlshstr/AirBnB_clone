@@ -24,11 +24,11 @@ class TestBaseModel(unittest.TestCase):
     def test_created_updated_at(self):
         ''' Tests the format of the create/update_at variables creation.'''
         b1 = BaseModel()
-        self.assertEqual(type(b1.created_at), str)
-        self.assertEqual(type(b1.updated_at), str)
-        self.assertRegex(b1.created_at,
+        self.assertEqual(type(b1.created_at), datetime.datetime)
+        self.assertEqual(type(b1.updated_at), datetime.datetime)
+        self.assertRegex(b1.created_at.isoformat(),
                          r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[.]\d{6}')
-        self.assertRegex(b1.updated_at,
+        self.assertRegex(b1.updated_at.isoformat(),
                          r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[.]\d{6}')
 
     def test_save_method(self):
@@ -37,10 +37,10 @@ class TestBaseModel(unittest.TestCase):
         temp_time = b1.updated_at
         b1.save()
         self.assertNotEqual(b1.updated_at, temp_time)
-        initial_time = b1.updated_at
+        initial_time = b1.updated_at.isoformat()
         time.sleep(.1)
         b1.save()
-        later_time = b1.updated_at
+        later_time = b1.updated_at.isoformat()
         time_passed = float(later_time[-8:]) - float(initial_time[-8:])
         self.assertTrue(bool(time_passed > .1))
 
@@ -49,11 +49,14 @@ class TestBaseModel(unittest.TestCase):
         b1 = BaseModel()
         time.sleep(.1)
         time_later = datetime.datetime.today().isoformat()
-        time_diff = float(time_later[-8:]) - float((b1.created_at)[-8:])
+        time_earlier = float(b1.created_at.isoformat()[-8:])
+        time_diff = float(time_later[-8:]) - time_earlier
         self.assertGreater(time_diff, .1)
-        self.assertEqual(b1.created_at[0:-8], time_later[0:-8])
+        self.assertEqual(b1.created_at.isoformat()[0:-8], time_later[0:-8])
 
     def test_str_(self):
         ''' Tests the format of __str__ method '''
-
+        b1 = BaseModel()
+        first_13_char = str(b1)[0:13]
+        self.assertEqual(first_13_char, "[BaseModel] (")
 
