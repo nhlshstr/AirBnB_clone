@@ -11,7 +11,6 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Constructor"""
         if kwargs is not None and kwargs != {}:
-            print(kwargs)
             for key, value in kwargs.items():
                 self.__dict__[key] = value
             self.__dict__["created_at"] = datetime.datetime.strptime(
