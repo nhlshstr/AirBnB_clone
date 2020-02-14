@@ -24,12 +24,15 @@ class FileStorage:
 
     def reload(self):
         ''' deserializes the JSON file to __objects (if file exists) '''
+        json_dict = {}
         try:
             with open(FileStorage.__file_path, 'r') as f:
-                FileStorage.__objects = json.loads(f.read())
+                json_dict = json.loads(f.read())
         except:
             return
-        for v in FileStorage.__objects.values():
-            v = BaseModel(**v)
+        FileStorage.__objects = {}
+        for keys in json_dict.keys():
+            FileStorage.__objects[keys] = BaseModel(**json_dict[keys])
+            
 
 
