@@ -60,3 +60,15 @@ class TestBaseModel(unittest.TestCase):
         first_13_char = str(b1)[0:13]
         self.assertEqual(first_13_char, "[BaseModel] (")
 
+    def test_to_dict(self):
+        ''' Tests the to_dict method '''
+        b1 = BaseModel()
+        b1_dict = b1.to_dict()
+        self.assertEqual(type(b1_dict), dict)
+        self.assertEqual(type(b1_dict["created_at"]), str)
+        self.assertEqual(type(b1_dict["updated_at"]), str)
+        self.assertRegex(b1_dict["created_at"],
+                         r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[.]\d{6}')
+        self.assertRegex(b1_dict["updated_at"],
+                         r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[.]\d{6}')
+
