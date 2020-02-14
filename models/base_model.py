@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is a base class module"""
 
-
+from models import storage
 import uuid
 import datetime
 
@@ -23,6 +23,7 @@ class BaseModel:
             """Time initialized in object format"""
             self.created_at = datetime.datetime.today()
             self.updated_at = datetime.datetime.today()
+            storage.new(self)
 
     def __str__(self):
         """Str method overwritten"""
@@ -32,6 +33,7 @@ class BaseModel:
     def save(self):
         """Method to update"""
         self.updated_at = datetime.datetime.today()
+        storage.save()
 
     def to_dict(self):
         """Adds class name to __dict__"""

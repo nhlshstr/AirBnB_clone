@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 ''' Module contains the class Filestorage '''
-from models.base_model import BaseModel
 import json
 
 class FileStorage:
