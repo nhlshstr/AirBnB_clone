@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 ''' Module contains the class Filestorage '''
 import json
+import models
+import models.base_model
 
 class FileStorage:
     __file_path = "file.json"
@@ -12,7 +14,7 @@ class FileStorage:
 
     def new(self, obj):
         ''' sets in __objects the obj with key <obj class name>.id '''
-        self.__objects["{}.{}".format(type(obj), obj.id)] = obj
+        self.__objects["{}.{}".format(type(obj).__name__, obj.id)] = obj
 
     def save(self):
         ''' serializes __objects to the JSON file (path: __file_path) '''
@@ -32,7 +34,7 @@ class FileStorage:
             return
         FileStorage.__objects = {}
         for keys in json_dict.keys():
-            FileStorage.__objects[keys] = BaseModel(**json_dict[keys])
+            FileStorage.__objects[keys] = models.base_model.BaseModel(**json_dict[keys])
             
 
 
