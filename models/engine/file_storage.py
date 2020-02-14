@@ -16,9 +16,17 @@ class FileStorage:
 
     def save(self):
         ''' serializes __objects to the JSON file (path: __file_path) '''
+        for v in FileStorage.__objects.values():
+            print()
+            print("##### Type: {}".format(type(v)))
+            print(v)
+            v = v.to_dict()
+            print()
+            print("##### Type: {}".format(type(v)))
+            print(v)
+            print()
+        print(FileStorage.__objects)
         with open(FileStorage.__file_path, 'w') as f:
-            for v in FileStorage.__objects.values():
-                v = v.to_dict()
             f.write(json.dumps(FileStorage.__objects))
 
     def reload(self):
