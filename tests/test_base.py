@@ -72,3 +72,9 @@ class TestBaseModel(unittest.TestCase):
         self.assertRegex(b1_dict["updated_at"],
                          r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[.]\d{6}')
 
+    def test_instance_from_dict(self):
+        b1 = BaseModel()
+        b1_dict = b1.to_dict()
+        b2 = BaseModel(**b1_dict)
+        self.assertEqual(type(b2), BaseModel)
+        self.assertEqual(type(b2.created_at), datetime.datetime)
