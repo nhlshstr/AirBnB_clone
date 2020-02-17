@@ -12,11 +12,12 @@ class BaseModel:
         """Constructor"""
         if kwargs is not None and kwargs != {}:
             for key, value in kwargs.items():
-                self.__dict__[key] = value
-            self.__dict__["created_at"] = datetime.datetime.strptime(
-                    self.__dict__["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
-            self.__dict__["updated_at"] = datetime.datetime.strptime(
-                    self.__dict__["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
+                if key == "created_at":
+                    self.created_at = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                elif key == "updated_at":
+                    self.updated_at = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                else:
+                    self.__dict__[key] = value
 
         else:
             self.id = str(uuid.uuid4())
@@ -37,8 +38,14 @@ class BaseModel:
 
     def to_dict(self):
         """Adds class name to __dict__"""
-        self.__dict__['__class__'] = type(self).__name__
+        dict_all = {}
+        dict_all["__class__"] = type(self).__name__
         """Times converted to string format"""
-        self.__dict__["created_at"] = self.created_at.isoformat()
-        self.__dict__["updated_at"] = self.updated_at.isoformat()
-        return self.__dict__
+        for k, v in self.__dict__.items():
+            if k == "created_at":
+                dict_all["created_at"] = self.created_at.isoformat()
+            elif k == "updated_at":
+                dict_all["updated_at"] = self.updated_at.isoformat()
+            else:
+                dict_all[k] = v
+        return dict_all
