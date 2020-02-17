@@ -101,5 +101,28 @@ class HBNBCommand(cmd.Cmd):
         print("Ex: $ all BaseModel")
         print()
 
+    def do_update(self, s):
+        ''' Updates an instance by adding or updating attribute '''
+        if len(s) == 0:
+            print("** class name missing **")
+        else:
+            line = s.split()
+            if line[0] not in classList:
+                print("** class doesn't exist **")
+            elif len(line) < 2:
+                print("** instance id missing **")
+            else:
+                key = "{}.{}".format(line[0], line[1])
+                if key not in models.storage.all().keys():
+                    print("** no instance found **")
+                elif len(line) == 2:
+                    print("** attribute name missing **")
+                elif len(line) == 3:
+                    print("** value missing **")
+                else:
+                    setattr(models.storage.all()[key], str(line[2]), line[3])
+                    models.storage.save()
+                    
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
