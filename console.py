@@ -87,14 +87,14 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, s):
         ''' Prints all instances of the class name '''
-        if s == "BaseModel":
-            print(models.storage.all())
-            '''
-            for keys in storage.__objects.keys():
-                print(storage.__objects[keys])
-            '''
-        else:
+        if s not in classList:
             print("** class doesn't exist **")
+        else:
+            list_all = []
+            for keys in models.storage.all().keys():
+                if s == keys.split('.')[0]:
+                    list_all.append(str(models.storage.all()[keys]))
+            print(list_all)
 
     def help_all(self):
         print("Prints all instances based of the class name.")
