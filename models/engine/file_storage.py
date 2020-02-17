@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 ''' Module contains the class Filestorage '''
+import datetime
 import json
 import models
 import models.base_model
@@ -35,6 +36,3 @@ class FileStorage:
         FileStorage.__objects = {}
         for keys in json_dict.keys():
             FileStorage.__objects[keys] = models.base_model.BaseModel(**json_dict[keys])
-            
-
-
