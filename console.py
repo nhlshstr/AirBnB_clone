@@ -56,7 +56,11 @@ class HBNBCommand(cmd.Cmd):
                     print(models.storage.all()[key])
                 else:
                     print("** no instance found **")
-                    
+    
+    def help_show(self):
+        print("Prints the string representation of an instance")
+        print("Ex $ show BaseModel 6dc7ee88-a360-49bb-b998-7140917e65a5")
+        print()
 
 
     def do_all(self, s):
