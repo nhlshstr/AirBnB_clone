@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 ''' This module contains the entry point for the command interpreter '''
 import cmd
+import re
 import models
 from models.base_model import BaseModel
 
 classList = ['BaseModel']
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
@@ -39,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
         print("Creates a new instance of the class, saves it to file.")
         print("Ex $ create BaseModel")
         print()
-    
+
     def do_show(self, s):
         ''' Prints the string representation of an instance '''
         if len(s) == 0:
@@ -56,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
                     print(models.storage.all()[key])
                 else:
                     print("** no instance found **")
-    
+
     def help_show(self):
         print("Prints the string representation of an instance")
         print("Ex $ show BaseModel 6dc7ee88-a360-49bb-b998-7140917e65a5")
@@ -75,8 +77,8 @@ class HBNBCommand(cmd.Cmd):
             else:
                 key = "{}.{}".format(line[0], line[1])
                 if key in models.storage.all().keys():
-                     del models.storage.all()[key]
-                     models.storage.save()
+                    del models.storage.all()[key]
+                    models.storage.save()
                 else:
                     print("** no instance found **")
 
@@ -87,10 +89,14 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, s):
         ''' Prints all instances of the class name '''
-        if s not in classList:
+        list_all = []
+        if len(s) == 0:
+            for keys in models.storage.all().keys():
+                    list_all.append(str(models.storage.all()[keys]))
+            print(list_all)
+        elif s not in classList:
             print("** class doesn't exist **")
         else:
-            list_all = []
             for keys in models.storage.all().keys():
                 if s == keys.split('.')[0]:
                     list_all.append(str(models.storage.all()[keys]))
@@ -106,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
         if len(s) == 0:
             print("** class name missing **")
         else:
-            line = s.split()
+            line = re.findall(r"(\".+\"|\S+)", s)
             if line[0] not in classList:
                 print("** class doesn't exist **")
             elif len(line) < 2:
@@ -120,9 +126,10 @@ class HBNBCommand(cmd.Cmd):
                 elif len(line) == 3:
                     print("** value missing **")
                 else:
-                    setattr(models.storage.all()[key], str(line[2]), line[3])
+                    if line[3][0] == '"' and line[3][-1] == '"':
+                        line[3] = line[3][1:-1]
+                    setattr(models.storage.all()[key], line[2], line[3])
                     models.storage.save()
-                    
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
