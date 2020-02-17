@@ -130,6 +130,11 @@ class HBNBCommand(cmd.Cmd):
                         line[3] = line[3][1:-1]
                     setattr(models.storage.all()[key], line[2], line[3])
                     models.storage.save()
+    
+    def help_update(self):
+        print("Updates an instance attribute")
+        print("ex $ [id] attribute_name attribute_value")
+        print()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
