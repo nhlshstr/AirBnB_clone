@@ -33,7 +33,13 @@ class HBNBCommand(cmd.Cmd):
         else:
             new_object = eval("{}()".format(s))
             models.storage.save()
+            print(new_object.id)
 
+    def help_create(self):
+        print("Creates a new instance of the class, saves it to file.")
+        print("Ex $ create BaseModel")
+        print()
+    
     def do_show(self, s):
         ''' Prints the string representation of an instance '''
         if len(s) == 0:
@@ -52,10 +58,6 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
                     
 
-    def help_create(self):
-        print("Creates a new instance of the class, saves it to file.")
-        print("Ex $ create BaseModel")
-        print()
 
     def do_all(self, s):
         ''' Prints all instances of the class name '''
