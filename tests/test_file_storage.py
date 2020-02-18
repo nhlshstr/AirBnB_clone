@@ -54,7 +54,25 @@ class TestFileStorage(unittest.TestCase):
 
     def testaddStorage(self):
         """Tests adding an object to storage"""
+        baseTest = BaseModel()
+        x1.new(baseTest)
 
+        self.assertIs(type(x1.all()), dict)
+        self.assertEqual(x1.all()["BaseModel" + "." + baseTest.id], BaseModel)
+
+    def jsonSave(self):
+        """Tests storage file pipe"""
+        obj1 = BaseModel()
+        obj2 = BaseModel()
+
+        x1.new(obj1)
+        x1.new(obj2)
+        x1.save()
+
+        dicto = {key:value.to_dict() for key, value in x1.all().items()}
+
+        with open("sample.json", "r") as yyz:
+            self.assertEqual(json.loads(yyz.read()), dicto)
 
 
 
