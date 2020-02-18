@@ -4,11 +4,13 @@ import unittest
 import os
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+import json
+
+x1 = FileStorage()
 
 class TestFileStorage(unittest.TestCase):
 
     jPath = ""
-    x1 = FileStorage()
 
     def setUp(self):
         """Creates new file storage class when a test runs"""
@@ -38,7 +40,7 @@ class TestFileStorage(unittest.TestCase):
         myDict = {"BaseModel.555":{"this":25, "be": 255},
                 "BaseModel.666":{"the":44, "end": 55}}
         FileStorage._FileStorage__objects = myDict
-        self.assertEqual(myDict, TestFileStorage.x1.all())
+        self.assertEqual(myDict, TestFileStorage.s1.all())
 
 
     def testNew(self):
@@ -52,15 +54,15 @@ class TestFileStorage(unittest.TestCase):
         FileStorage._FileStorage__objects = {}
         s.reload()
 
-    def testaddStorage(self):
+    def testAddObj(self):
         """Tests adding an object to storage"""
-        baseTest = BaseModel()
-        x1.new(baseTest)
+        ba = BaseModel()
+        x1.new(ba)
 
         self.assertIs(type(x1.all()), dict)
-        self.assertEqual(x1.all()["BaseModel" + "." + baseTest.id], BaseModel)
+        self.assertEqual(x1.all()["BaseModel" + "." + ba.id], BaseModel)
 
-    def jsonSave(self):
+    def testjsonSave(self):
         """Tests storage file pipe"""
         obj1 = BaseModel()
         obj2 = BaseModel()
@@ -73,12 +75,3 @@ class TestFileStorage(unittest.TestCase):
 
         with open("sample.json", "r") as yyz:
             self.assertEqual(json.loads(yyz.read()), dicto)
-
-
-
-
-
-
-
-
-
