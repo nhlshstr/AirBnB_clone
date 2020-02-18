@@ -9,13 +9,13 @@ class TestFileStorage(unittest.TestCase):
 
     jPath = ""
 
-    def SetUp(self):
-        """Creates new file_storage when a test runs"""
+    def setUp(self):
+        """Creates new file storage class when a test runs"""
         FileStorage._FileStorage__objects = {}
         TestFileStorage._jPath = FileStorage._FileStorage__file_path
         FileStorage._FileStorage__file_path = "sample.json"
 
-    def Destroy(self):
+    def tearDown(self):
         """Removes sample.json file"""
         try:
             os.remove("sample.json")
@@ -24,7 +24,7 @@ class TestFileStorage(unittest.TestCase):
         FileStorage._FileStorage__file_path = TestFileStorage.jPath
 
 
-    def all(self):
+    def testAllResturn(self):
         ''' Tests that the all method returns a dictionary '''
         s1 = FileStorage()
         b1 = BaseModel()
@@ -32,7 +32,16 @@ class TestFileStorage(unittest.TestCase):
         temp = s.all()
         self.assertEqual(type(temp), dict)
 
-    def test_new(self):
+    def testObjectMatch(self):
+        """ Checks all() method """
+        x1 = FileStorage()
+        myDict = {"BaseModel.555":{"this":25, "be": 255},
+                "BaseModel.666":{"the":44, "end": 55}}
+        FileStorage.__FileStorage__objects = myDict
+        self.assertEqual(myDicts, x1.all())
+
+
+    def testNew(self):
         ''' Test that the new function adds a key:value pair to __objects '''
         s = FileStorage()
         FileStorage._FileStorage__objects = {}
@@ -42,5 +51,6 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(len(s.all()), 1)
         FileStorage._FileStorage__objects = {}
         s.reload()
+    
 
 
