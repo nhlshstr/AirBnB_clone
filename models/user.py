@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import base_model.BaseModel
+from base_model import BaseModel
+
 
 class User (BaseModel):
     email = ""
