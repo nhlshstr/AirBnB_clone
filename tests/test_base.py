@@ -32,20 +32,18 @@ class TestBaseModel(unittest.TestCase):
         self.assertRegex(b1.updated_at.isoformat(),
                          r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[.]\d{6}')
 
+    def test_str_(self):
+        ''' Tests the format of __str__ method '''
+        b1 = BaseModel()
+        self.assertEqual(type(str(b1)), str)
+        first_13_char = str(b1)[0:13]
+        self.assertEqual(first_13_char, "[BaseModel] (")
+
     def test_save_method(self):
         ''' Tests the save method for correct time'''
-        '''
         b1 = BaseModel()
-        temp_time = b1.updated_at
         b1.save()
-        self.assertNotEqual(b1.updated_at, temp_time)
-        initial_time = b1.updated_at.isoformat()
-        time.sleep(.1)
-        b1.save()
-        later_time = b1.updated_at.isoformat()
-        time_passed = float(later_time[-8:]) - float(initial_time[-8:])
-        self.assertTrue(bool(time_passed > .1))
-        '''
+        self.assertNotEqual(b1.updated_at, b1.created_at)
 
     def test_created_at_time(self):
         ''' Tests that created_at method is assigning correct time '''
@@ -57,16 +55,16 @@ class TestBaseModel(unittest.TestCase):
         self.assertGreater(time_diff, .1)
         self.assertEqual(b1.created_at.isoformat()[0:-8], time_later[0:-8])
 
-    def test_str_(self):
-        ''' Tests the format of __str__ method '''
-        b1 = BaseModel()
-        first_13_char = str(b1)[0:13]
-        self.assertEqual(first_13_char, "[BaseModel] (")
-
     def test_to_dict(self):
         ''' Tests the to_dict method '''
         b1 = BaseModel()
         b1_dict = b1.to_dict()
+        b1_dict_noClass = []
+        for keys in b1_dict.keys():
+            if keys is not "__class__":
+                b1_dict_noClass.append(keys)
+        self.assertEqual(b1_dict_noClass, list(b1.__dict__.keys()))
+        self.assertEqual(b1_dict['__class__'], "BaseModel")
         self.assertEqual(type(b1_dict), dict)
         self.assertEqual(type(b1_dict["created_at"]), str)
         self.assertEqual(type(b1_dict["updated_at"]), str)
