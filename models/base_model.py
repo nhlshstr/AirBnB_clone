@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """This is a base class module"""
 
 import datetime
@@ -13,9 +13,11 @@ class BaseModel:
         if kwargs is not None and kwargs != {}:
             for key, value in kwargs.items():
                 if key == "created_at":
-                    self.created_at = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    self.created_at = datetime.datetime.\
+                            strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 elif key == "updated_at":
-                    self.updated_at = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    self.updated_at = datetime.datetime.\
+                            strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 else:
                     self.__dict__[key] = value
 
