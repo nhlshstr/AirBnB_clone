@@ -11,6 +11,7 @@ x1 = FileStorage()
 class TestFileStorage(unittest.TestCase):
 
     jPath = ""
+    x1 = FileStorage()
 
     def setUp(self):
         """Creates new file storage class when a test runs"""
@@ -40,7 +41,7 @@ class TestFileStorage(unittest.TestCase):
         myDict = {"BaseModel.555":{"this":25, "be": 255},
                 "BaseModel.666":{"the":44, "end": 55}}
         FileStorage._FileStorage__objects = myDict
-        self.assertEqual(myDict, TestFileStorage.s1.all())
+        self.assertEqual(myDict, TestFileStorage.x1.all())
 
 
     def testNew(self):
@@ -60,7 +61,7 @@ class TestFileStorage(unittest.TestCase):
         x1.new(ba)
 
         self.assertIs(type(x1.all()), dict)
-        self.assertEqual(x1.all()["BaseModel" + "." + ba.id], BaseModel)
+        self.assertEqual(type(x1.all()["BaseModel" + "." + ba.id]), BaseModel)
 
     def testjsonSave(self):
         """Tests storage file pipe"""
