@@ -12,10 +12,30 @@ from models.review import Review
 from models.user import User
 
 classList = ['BaseModel', 'User', 'City', 'State', 'Place', 'Amenity', 'Review']
-
+methodList = ['all', 'create', 'show', 'destroy', 'update', 'count']
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
+
+    def default(self, s):
+        command = re.search(r"(?<=\.)\w+(?=\()", s)
+        class_name = re.search(r"\w+(?=\.)", s)
+        id_atts = re.findall(r"(?<=\")[^,\"]+(?=\")", s)
+        if command == None:
+            super().default(s)
+        elif command.group() not in methodList:
+            super().default(s)
+        else:
+            command = command.group()
+            if class_name is not None:
+                args = class_name.group()
+                for i in range (len(id_atts)):
+                    if i == 2:
+                        args = args + ' "' + id_atts[i] + '"'
+                    else:
+                        args = args + ' ' + id_atts[i]
+                func_call = "self.do_{}('{}')".format(command, args)
+                eval(func_call)
 
     def emptyline(self):
         ''' Disables repetition of previous command '''
@@ -30,6 +50,20 @@ class HBNBCommand(cmd.Cmd):
 
     do_EOF = do_quit
     help_EOF = help_quit
+
+    def do_count(self, s):
+        if s is None or s == "":
+            print(len(models.storage.all()))
+        line = s.split()
+        if line[0] not in classList:
+            print("** class doesn't exist **")
+        else:
+            count = 0
+            for keys in models.storage.all().keys():
+                class_name = re.search(r"\w+(?=\.)", keys)
+                if line[0] == class_name.group():
+                    count += 1
+            print(count)
 
     def do_create(self, s):
         ''' Creates a new instance of the class and saves it '''
