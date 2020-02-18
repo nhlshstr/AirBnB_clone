@@ -24,12 +24,12 @@ class TestFileStorage(unittest.TestCase):
         FileStorage._FileStorage__file_path = TestFileStorage.jPath
 
 
-    def testAllResturn(self):
+    def testAllReturn(self):
         ''' Tests that the all method returns a dictionary '''
         s1 = FileStorage()
         b1 = BaseModel()
-        s.new(b1)
-        temp = s.all()
+        s1.new(b1)
+        temp = s1.all()
         self.assertEqual(type(temp), dict)
 
     def testObjectMatch(self):
@@ -38,7 +38,7 @@ class TestFileStorage(unittest.TestCase):
         myDict = {"BaseModel.555":{"this":25, "be": 255},
                 "BaseModel.666":{"the":44, "end": 55}}
         FileStorage.__FileStorage__objects = myDict
-        self.assertEqual(myDicts, x1.all())
+        self.assertEqual(myDict, x1.all())
 
 
     def testNew(self):
