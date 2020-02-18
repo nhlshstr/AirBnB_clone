@@ -8,6 +8,7 @@ from models.engine.file_storage import FileStorage
 class TestFileStorage(unittest.TestCase):
 
     jPath = ""
+    x1 = FileStorage()
 
     def setUp(self):
         """Creates new file storage class when a test runs"""
@@ -32,9 +33,8 @@ class TestFileStorage(unittest.TestCase):
         temp = s1.all()
         self.assertEqual(type(temp), dict)
 
-    def testObjectMatch(self):
+    def testObjectMatch(self, x1):
         """ Checks all() method """
-        x1 = FileStorage()
         myDict = {"BaseModel.555":{"this":25, "be": 255},
                 "BaseModel.666":{"the":44, "end": 55}}
         FileStorage.__FileStorage__objects = myDict
