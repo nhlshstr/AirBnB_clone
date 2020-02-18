@@ -18,7 +18,7 @@ class BaseModel:
                 elif key == "updated_at":
                     self.updated_at = datetime.datetime.\
                             strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                else:
+                elif key is not "__class__":
                     self.__dict__[key] = value
 
         else:
