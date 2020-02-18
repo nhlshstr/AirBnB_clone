@@ -5,6 +5,7 @@ import datetime
 import time
 from models.base_model import BaseModel
 
+
 class TestBaseModel(unittest.TestCase):
 
     def test_initialization(self):
@@ -14,10 +15,10 @@ class TestBaseModel(unittest.TestCase):
 
     def test_id_assignment(self):
         ''' Tests the assignment of an id to an instance '''
+        rs = r"[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
         b1 = BaseModel()
         self.assertEqual(type(b1.id), str)
-        self.assertRegex(b1.id,
-                         r'[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}')
+        self.assertRegex(b1.id, rs)
         b2 = BaseModel()
         self.assertNotEqual(b1.id, b2.id)
 
