@@ -11,8 +11,10 @@ from models.place import Place
 from models.review import Review
 from models.user import User
 
-classList = ['BaseModel', 'User', 'City', 'State', 'Place', 'Amenity', 'Review']
+classList = ['BaseModel', 'User', 'City',
+             'State', 'Place', 'Amenity', 'Review']
 methodList = ['all', 'create', 'show', 'destroy', 'update', 'count']
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
@@ -21,7 +23,7 @@ class HBNBCommand(cmd.Cmd):
         command = re.search(r"(?<=\.)\w+(?=\()", s)
         class_name = re.search(r"\w+(?=\.)", s)
         id_atts = re.findall(r"(?<=\")[^,\"]+(?=\")", s)
-        if command == None:
+        if command is None:
             super().default(s)
         elif command.group() not in methodList:
             super().default(s)
@@ -29,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
             command = command.group()
             if class_name is not None:
                 args = class_name.group()
-                for i in range (len(id_atts)):
+                for i in range(len(id_atts)):
                     if i == 2:
                         args = args + ' "' + id_atts[i] + '"'
                     else:
@@ -170,7 +172,7 @@ class HBNBCommand(cmd.Cmd):
                         line[3] = line[3][1:-1]
                     setattr(models.storage.all()[key], line[2], line[3])
                     models.storage.save()
-    
+
     def help_update(self):
         print("Updates an instance attribute")
         print("ex $ [id] attribute_name attribute_value")
