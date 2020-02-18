@@ -7,10 +7,10 @@ from models.engine.file_storage import FileStorage
 
 class TestFileStorage(unittest.TestCase):
 
+    jPath = ""
 
     def SetUp(self):
         """Creates new file_storage when a test runs"""
-        jPath = ""
         FileStorage._FileStorage__objects = {}
         TestFileStorage._jPath = FileStorage._FileStorage__file_path
         FileStorage._FileStorage__file_path = "sample.json"
