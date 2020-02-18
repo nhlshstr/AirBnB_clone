@@ -4,6 +4,7 @@ import datetime
 import json
 import models
 import models.base_model
+import models.user
 
 class FileStorage:
     __file_path = "file.json"
@@ -35,4 +36,17 @@ class FileStorage:
             return
         FileStorage.__objects = {}
         for keys in json_dict.keys():
-            FileStorage.__objects[keys] = models.base_model.BaseModel(**json_dict[keys])
+            if json_dict[keys][__class__] == "BaseModel":
+                FileStorage.__objects[keys] = models.base_model.BaseModel(**json_dict[keys])
+            elif json_dict[keys][__class__] == "User":
+                FileStorage.__objects[keys] = models.user.User(**json_dict[keys])
+            elif json_dict[keys][__class__] == "State":
+                FileStorage.__objects[keys] = models.state.State(**json_dict[keys])
+            elif json_dict[keys][__class__] == "City":
+                FileStorage.__objects[keys] = models.city.City(**json_dict[keys])
+            elif json_dict[keys][__class__] == "Amenity":
+                FileStorage.__objects[keys] = models.amenity.Amenity(**json_dict[keys])
+            elif json_dict[keys][__class__] == "Place":
+                FileStorage.__objects[keys] = models.place.Place(**json_dict[keys])
+            else:
+                FileStorage.__objects[keys] = models.review.Review(**json_dict[keys])
