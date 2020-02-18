@@ -4,6 +4,9 @@ import unittest
 import os
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+import json
+
+x1 = FileStorage()
 
 class TestFileStorage(unittest.TestCase):
 
@@ -52,15 +55,15 @@ class TestFileStorage(unittest.TestCase):
         FileStorage._FileStorage__objects = {}
         s.reload()
 
-    def testaddStorage(self):
+    def testAddObj(self):
         """Tests adding an object to storage"""
-        baseTest = BaseModel()
-        x1.new(baseTest)
+        ba = BaseModel()
+        x1.new(ba)
 
         self.assertIs(type(x1.all()), dict)
-        self.assertEqual(x1.all()["BaseModel" + "." + baseTest.id], BaseModel)
+        self.assertEqual(type(x1.all()["BaseModel" + "." + ba.id]), BaseModel)
 
-    def jsonSave(self):
+    def testjsonSave(self):
         """Tests storage file pipe"""
         obj1 = BaseModel()
         obj2 = BaseModel()
@@ -73,12 +76,3 @@ class TestFileStorage(unittest.TestCase):
 
         with open("sample.json", "r") as yyz:
             self.assertEqual(json.loads(yyz.read()), dicto)
-
-
-
-
-
-
-
-
-
