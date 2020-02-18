@@ -51,3 +51,16 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(len(s.all()), 1)
         FileStorage._FileStorage__objects = {}
         s.reload()
+
+    def testaddStorage(self):
+        """Tests adding an object to storage"""
+
+
+
+
+
+
+
+
+
+
