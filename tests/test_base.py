@@ -31,7 +31,7 @@ class TestBaseModel(unittest.TestCase):
                          r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[.]\d{6}')
         self.assertRegex(b1.updated_at.isoformat(),
                          r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[.]\d{6}')
-    
+
     def test_str_(self):
         ''' Tests the format of __str__ method '''
         b1 = BaseModel()
@@ -55,7 +55,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertGreater(time_diff, .1)
         self.assertEqual(b1.created_at.isoformat()[0:-8], time_later[0:-8])
 
-
     def test_to_dict(self):
         ''' Tests the to_dict method '''
         b1 = BaseModel()
@@ -64,7 +63,6 @@ class TestBaseModel(unittest.TestCase):
         for keys in b1_dict.keys():
             if keys is not "__class__":
                 b1_dict_noClass.append(keys)
-        print(b1_dict.keys())
         self.assertEqual(b1_dict_noClass, list(b1.__dict__.keys()))
         self.assertEqual(b1_dict['__class__'], "BaseModel")
         self.assertEqual(type(b1_dict), dict)
