@@ -33,12 +33,12 @@ class TestFileStorage(unittest.TestCase):
         temp = s1.all()
         self.assertEqual(type(temp), dict)
 
-    def testObjectMatch(self, x1):
+    def testObjectMatch(self):
         """ Checks all() method """
         myDict = {"BaseModel.555":{"this":25, "be": 255},
                 "BaseModel.666":{"the":44, "end": 55}}
-        FileStorage.__FileStorage__objects = myDict
-        self.assertEqual(myDict, x1.all())
+        FileStorage._FileStorage__objects = myDict
+        self.assertEqual(myDict, TestFileStorage.x1.all())
 
 
     def testNew(self):
