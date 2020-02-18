@@ -41,17 +41,17 @@ class FileStorage:
             return
         FileStorage.__objects = {}
         for keys in json_dict.keys():
-            if json_dict[keys][__class__] == "BaseModel":
+            if json_dict[keys]['__class__'] == "BaseModel":
                 FileStorage.__objects[keys] = models.base_model.BaseModel(**json_dict[keys])
-            elif json_dict[keys][__class__] == "User":
+            elif json_dict[keys]['__class__'] == "User":
                 FileStorage.__objects[keys] = models.user.User(**json_dict[keys])
-            elif json_dict[keys][__class__] == "State":
+            elif json_dict[keys]['__class__'] == "State":
                 FileStorage.__objects[keys] = models.state.State(**json_dict[keys])
-            elif json_dict[keys][__class__] == "City":
+            elif json_dict[keys]['__class__'] == "City":
                 FileStorage.__objects[keys] = models.city.City(**json_dict[keys])
-            elif json_dict[keys][__class__] == "Amenity":
+            elif json_dict[keys]['__class__'] == "Amenity":
                 FileStorage.__objects[keys] = models.amenity.Amenity(**json_dict[keys])
-            elif json_dict[keys][__class__] == "Place":
+            elif json_dict[keys]['__class__'] == "Place":
                 FileStorage.__objects[keys] = models.place.Place(**json_dict[keys])
             else:
                 FileStorage.__objects[keys] = models.review.Review(**json_dict[keys])
