@@ -7,6 +7,7 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
+    ''' Tests the base model '''
 
     def test_initialization(self):
         ''' Tests the type of a new instance '''
@@ -60,10 +61,11 @@ class TestBaseModel(unittest.TestCase):
         b1 = BaseModel()
         b1_dict = b1.to_dict()
         b1_dict_noClass = []
+        ''' This is to test that we're not adding extra stuff '''
         for keys in b1_dict.keys():
             if keys is not "__class__":
                 b1_dict_noClass.append(keys)
-        self.assertEqual(b1_dict_noClass, list(b1.__dict__.keys()))
+        self.assertCountEqual(b1_dict_noClass, list(b1.__dict__.keys()))
         self.assertEqual(b1_dict['__class__'], "BaseModel")
         self.assertEqual(type(b1_dict), dict)
         self.assertEqual(type(b1_dict["created_at"]), str)
@@ -74,8 +76,11 @@ class TestBaseModel(unittest.TestCase):
                          r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[.]\d{6}')
 
     def test_instance_from_dict(self):
+        ''' Tesets instance from dict '''
         b1 = BaseModel()
         b1_dict = b1.to_dict()
         b2 = BaseModel(**b1_dict)
         self.assertEqual(type(b2), BaseModel)
         self.assertEqual(type(b2.created_at), datetime.datetime)
+        with self.assertRaises(KeyError):
+            b2.__dict__["__class__"]
