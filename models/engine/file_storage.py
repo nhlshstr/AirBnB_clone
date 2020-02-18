@@ -5,6 +5,11 @@ import json
 import models
 import models.base_model
 import models.user
+import models.state
+import models.city
+import models.amenity
+import models.place
+import models.review
 
 class FileStorage:
     __file_path = "file.json"
