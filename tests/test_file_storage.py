@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 ''' Module for testing the class FileStorage '''
 import unittest
 import os
@@ -51,6 +51,3 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(len(s.all()), 1)
         FileStorage._FileStorage__objects = {}
         s.reload()
-    
-
-
