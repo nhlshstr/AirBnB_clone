@@ -3,6 +3,7 @@
 import unittest
 from models.state import State
 
+
 class testState(unittest.TestCase):
     """Class to test state"""
     def testType(self):
@@ -15,4 +16,3 @@ class testState(unittest.TestCase):
         x1 = State()
         self.assertEqual(type(x1.name), str)
         self.assertEqual(x1.name, "")
-

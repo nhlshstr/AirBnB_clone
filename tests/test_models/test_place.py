@@ -3,6 +3,7 @@
 import unittest
 from models.place import Place
 
+
 class testCity(unittest.TestCase):
     """Class to test City"""
     def testType(self):
@@ -57,7 +58,6 @@ class testCity(unittest.TestCase):
         x1 = Place()
         self.assertEqual(type(x1.price_by_night), int)
         self.assertEqual(x1.price_by_night, 0)
-
 
     def testLatitude(self):
         """To check latitude"""
