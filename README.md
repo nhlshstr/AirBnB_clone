@@ -1,6 +1,6 @@
 ![Image description](65f4a1dd9c51265f49d0.png) 
 
-# <p style="text-align: center;"> AirBnB Clone - The Console </p>
+# <center> AirBnB Clone - The Console </center>
 
 ### The console is a command interpreter to manage the objects of this project:
 
