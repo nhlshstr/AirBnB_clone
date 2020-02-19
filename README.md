@@ -1,4 +1,4 @@
-![Image description](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUZGDONYM4%2F20200218%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200218T222240Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=1950d2d8890ddde6e695a3e72e0a71521374cfbf4c8f07c41ab41503dfb3649f) 
+![Image description](65f4a1dd9c51265f49d0.png) 
 
 # AirBnB Clone - The Console
 
