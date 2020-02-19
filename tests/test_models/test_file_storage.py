@@ -8,6 +8,7 @@ import json
 
 x1 = FileStorage()
 
+
 class TestFileStorage(unittest.TestCase):
 
     jPath = ""
@@ -27,7 +28,6 @@ class TestFileStorage(unittest.TestCase):
             pass
         FileStorage._FileStorage__file_path = TestFileStorage.jPath
 
-
     def testAllReturn(self):
         ''' Tests that the all method returns a dictionary '''
         s1 = FileStorage()
@@ -38,11 +38,10 @@ class TestFileStorage(unittest.TestCase):
 
     def testObjectMatch(self):
         """ Checks all() method """
-        myDict = {"BaseModel.555":{"this":25, "be": 255},
-                "BaseModel.666":{"the":44, "end": 55}}
+        myDict = {"BaseModel.555": {"this": 25, "be": 255},
+                  "BaseModel.666": {"the": 44, "end": 55}}
         FileStorage._FileStorage__objects = myDict
         self.assertEqual(myDict, TestFileStorage.x1.all())
-
 
     def testNew(self):
         ''' Test that the new function adds a key:value pair to __objects '''
@@ -72,7 +71,7 @@ class TestFileStorage(unittest.TestCase):
         x1.new(obj2)
         x1.save()
 
-        dicto = {key:value.to_dict() for key, value in x1.all().items()}
+        dicto = {key: value.to_dict() for key, value in x1.all().items()}
 
         with open("sample.json", "r") as yyz:
             self.assertEqual(json.loads(yyz.read()), dicto)
