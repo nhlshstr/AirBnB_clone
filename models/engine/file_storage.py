@@ -12,7 +12,9 @@ import models.amenity
 import models.place
 import models.review
 
+
 class FileStorage:
+    ''' This is the class file storage '''
     __file_path = "file.json"
     __objects = {}
 
@@ -40,19 +42,24 @@ class FileStorage:
                 json_dict = json.loads(f.read())
         except:
             return
-        FileStorage.__objects = {}
+        ''' Only created this objs to please pep8 '''
+        ''' Other wise would have directly built the filstorage.objects '''
+        objs = {}
         for keys in json_dict.keys():
             if json_dict[keys]['__class__'] == "BaseModel":
-                FileStorage.__objects[keys] = models.base_model.BaseModel(**json_dict[keys])
+                objs[keys] = models.base_model.BaseModel(**json_dict[keys])
             elif json_dict[keys]['__class__'] == "User":
-                FileStorage.__objects[keys] = models.user.User(**json_dict[keys])
+                objs[keys] = models.user.User(**json_dict[keys])
             elif json_dict[keys]['__class__'] == "State":
-                FileStorage.__objects[keys] = models.state.State(**json_dict[keys])
+                objs[keys] = models.state.State(**json_dict[keys])
             elif json_dict[keys]['__class__'] == "City":
-                FileStorage.__objects[keys] = models.city.City(**json_dict[keys])
+                objs[keys] = models.city.City(**json_dict[keys])
             elif json_dict[keys]['__class__'] == "Amenity":
-                FileStorage.__objects[keys] = models.amenity.Amenity(**json_dict[keys])
+                objs[keys] = models.amenity.Amenity(**json_dict[keys])
             elif json_dict[keys]['__class__'] == "Place":
-                FileStorage.__objects[keys] = models.place.Place(**json_dict[keys])
+                objs[keys] = models.place.Place(**json_dict[keys])
             else:
-                FileStorage.__objects[keys] = models.review.Review(**json_dict[keys])
+                objs[keys] = models.review.Review(**json_dict[keys])
+        FileStorage.__objects = {}
+        for keys in objs.keys():
+            FileStorage.__objects[keys] = objs[keys]
