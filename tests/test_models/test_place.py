@@ -35,8 +35,20 @@ class testCity(unittest.TestCase):
         self.assertEqual(x1.description, "")
     
     def testNoRooms(self):
-        """To check if description is of type string"""
+        """To check rooms"""
         x1 = Place()
         self.assertEqual(type(x1.number_rooms, int)
-        self.assertEqual(x1.number_rooms, "")
+        self.assertEqual(x1.number_rooms, 0)
+    
+    def testNoBathRooms(self):
+        """To check bathrooms"""
+        x1 = Place()
+        self.assertEqual(type(x1.number_bathrooms, int)
+        self.assertEqual(x1.number_bathrooms, 0)
+    
+    def testMaxGuests(self):
+        """To check max guests"""
+        x1 = Place()
+        self.assertEqual(type(x1.max_guests, int)
+        self.assertEqual(x1.max_guests, 0)
 
