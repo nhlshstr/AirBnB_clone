@@ -19,5 +19,5 @@ class testCity(unittest.TestCase):
     def testStateID(self):
         """To check if state ID is of type string"""
         x1 = City()
-        self.assertEqual(type(x1.state_id, str)
+        self.assertEqual(type(x1.state_id), str)
         self.assertEqual(x1.state_id, "")
