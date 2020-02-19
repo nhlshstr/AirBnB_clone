@@ -21,4 +21,3 @@ class testCity(unittest.TestCase):
         x1 = City()
         self.assertEqual(type(x1.state_id, str)
         self.assertEqual(x1.state_id, "")
-
