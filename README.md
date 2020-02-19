@@ -1,6 +1,6 @@
 # AirBnB Clone - The Console
 
-### The console is a command interpretert to manage the objects of this project:
+### The console is a command interpreter to manage the objects of this project:
 
 - Create a new object (ex: a new User or a new Place)
 - Retrieve an object from a file, a database etc…
