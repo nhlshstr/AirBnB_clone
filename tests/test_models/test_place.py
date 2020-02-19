@@ -52,3 +52,21 @@ class testCity(unittest.TestCase):
         self.assertEqual(type(x1.max_guests, int)
         self.assertEqual(x1.max_guests, 0)
 
+    def testNightPrice(self):
+        """To check nightly price"""
+        x1 = Place()
+        self.assertEqual(type(x1.price_by_night, int)
+        self.assertEqual(x1.price_by_night, "")
+
+
+    def testLatitude(self):
+        """To check latitude"""
+        x1 = Place()
+        self.assertEqual(type(x1.latitude, float)
+        self.assertEqual(x1.latitude, 0.0)
+
+    def testLongitude(self):
+        """To check longitude"""
+        x1 = Place()
+        self.assertEqual(type(x1.longitude, float)
+        self.assertEqual(x1.longitude, 0.0)
