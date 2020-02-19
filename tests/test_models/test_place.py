@@ -70,3 +70,9 @@ class testCity(unittest.TestCase):
         x1 = Place()
         self.assertEqual(type(x1.longitude, float)
         self.assertEqual(x1.longitude, 0.0)
+
+    def testAmenityID(self):
+        """To check amenityID"""
+        x1 = Place()
+        self.assertEqual(type(x1.amenity_ids, list)
+        self.assertEqual(x1.amenity_ids, [])
