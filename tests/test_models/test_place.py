@@ -27,10 +27,16 @@ class testCity(unittest.TestCase):
         x1 = Place()
         self.assertEqual(type(x1.user_id, str)
         self.assertEqual(x1.user_id, "")
-    
+
     def testDescription(self):
         """To check if description is of type string"""
         x1 = Place()
         self.assertEqual(type(x1.description, str)
         self.assertEqual(x1.description, "")
-     
+    
+    def testNoRooms(self):
+        """To check if description is of type string"""
+        x1 = Place()
+        self.assertEqual(type(x1.number_rooms, int)
+        self.assertEqual(x1.number_rooms, "")
+
