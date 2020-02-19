@@ -56,7 +56,7 @@ class testCity(unittest.TestCase):
         """To check nightly price"""
         x1 = Place()
         self.assertEqual(type(x1.price_by_night), int)
-        self.assertEqual(x1.price_by_night, "")
+        self.assertEqual(x1.price_by_night, 0)
 
 
     def testLatitude(self):
