@@ -9,7 +9,7 @@ class testReview(unittest.TestCase):
     def testType(self):
         ''' Tests type after creation '''
         r1 = Review()
-        self.assertEqual(type(r1), User)
+        self.assertEqual(type(r1), Review)
 
     def testVariables(self):
         ''' Tests the class attributes that they exist '''

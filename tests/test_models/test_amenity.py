@@ -15,4 +15,4 @@ class testAmenity(unittest.TestCase):
         ''' Tests the class attributes that they exist '''
         a1 = Amenity()
         self.assertEqual(type(a1.name), str)
-        self.assertEqual(u1.name, "")
+        self.assertEqual(a1.name, "")
